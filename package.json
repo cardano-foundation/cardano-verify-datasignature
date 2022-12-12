@@ -1,8 +1,8 @@
 {
-  "name": "@cardano-foundation/cardano-signature-verification",
+  "name": "@cardano-foundation/cardano-verify-datasignature",
   "version": "1.0.0",
-  "description": "A lightweight typescript library to verify a cip30 datasignature ",
-  "main": "index.js",
+  "description": "A lightweight typescript library to verify a cip30 datasignature",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "jest"
