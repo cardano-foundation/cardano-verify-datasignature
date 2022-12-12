@@ -5,7 +5,7 @@ A lightweight typescript library to verify a cip30 datasignature
 ## Getting Started
 
 ```zsh
-npm i @fabianbormann/cardano-signature-verification
+npm i @cardano-foundation/cardano-signature-verification
 ```
 
 ## Verification

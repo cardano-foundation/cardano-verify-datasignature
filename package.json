@@ -1,5 +1,5 @@
 {
-  "name": "@fabianbormann/cardano-signature-verification",
+  "name": "@cardano-foundation/cardano-signature-verification",
   "version": "1.0.0",
   "description": "A lightweight typescript library to verify a cip30 datasignature ",
   "main": "index.js",
@@ -13,8 +13,7 @@
     "cip8",
     "cip30"
   ],
-  "author": "Fabian Bormann <fabian.bormann@cardanofoundation.org>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@types/jest": "^29.2.4",
     "jest": "^29.3.1",
