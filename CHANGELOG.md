@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.1...v1.0.2) (2022-12-12)
+
+
+### Features
+
+* add webpack to build the module for browser and commonjs ([9bf7bf4](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/9bf7bf46453b3d1ee777517b5934a9551136b89d))
+
 ## [1.0.1](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.0...v1.0.1) (2022-12-12)
 
 
