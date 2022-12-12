@@ -14,6 +14,7 @@ const config = {
       export: 'default',
     },
     libraryTarget: 'umd',
+    globalObject: 'this',
   },
   experiments: {
     asyncWebAssembly: true,
