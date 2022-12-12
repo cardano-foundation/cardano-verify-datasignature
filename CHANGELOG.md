@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.0...v1.0.1) (2022-12-12)
+
+
+### Bug Fixes
+
+* set the package name to the github repo name ([43e9842](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/43e9842ba60d8fa074f87dee656910e1d2624e66))
+
 ## 1.0.0 (2022-12-12)
 
 
