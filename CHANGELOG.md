@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.4...v1.0.5) (2022-12-13)
+
+
+### Bug Fixes
+
+* link types and preserve docstrings ([2a4eb6f](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/2a4eb6fa340748b7021b9850d3d10991767a697a))
+
 ## [1.0.4](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.3...v1.0.4) (2022-12-13)
 
 
