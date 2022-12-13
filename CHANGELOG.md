@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.3...v1.0.4) (2022-12-13)
+
+
+### Features
+
+* add payment address verification ([e2e5341](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/e2e5341aa382a6ac4e0fd98566904c10599fc968))
+
 ## [1.0.3](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.2...v1.0.3) (2022-12-12)
 
 
