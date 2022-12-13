@@ -15,7 +15,7 @@
     "module": "es2015",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "removeComments": true,
+    "removeComments": false,
     "isolatedModules": true
   },
   "include": ["./index.ts"],

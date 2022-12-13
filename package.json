@@ -4,6 +4,7 @@
   "description": "A lightweight typescript library to verify a cip30 datasignature for browser and nodejs",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "webpack && tsc --emitDeclarationOnly",
     "test": "jest"
