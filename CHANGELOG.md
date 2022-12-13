@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.2...v1.0.3) (2022-12-12)
+
+
+### Bug Fixes
+
+* resolve bundle error unknown this ([b17be8f](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/b17be8fd78b5a16d2a17e58650ffd75dd85975f1))
+
 ## [1.0.2](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.1...v1.0.2) (2022-12-12)
 
 
