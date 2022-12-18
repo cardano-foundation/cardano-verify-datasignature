@@ -1,4 +1,4 @@
-import { Bip32PublicKey } from '@stricahq/bip32ed25519';
+import { Bip32PublicKey, PublicKey } from '@stricahq/bip32ed25519';
 import { getPublicKeyFromCoseKey, CoseSign1 } from '@stricahq/cip08';
 import { Decoder } from '@stricahq/cbors';
 import { BaseAddress, RewardAddress } from '@stricahq/typhonjs/dist/address';
@@ -44,41 +44,61 @@ const verifySignature = (
   if (message) {
     const decoded = Decoder.decode(Buffer.from(signature, 'hex'));
     const payload: Buffer = decoded.value[2];
-    if (payload.toString('utf8') !== message) {
+
+    if (payload && payload.toString('utf8') !== message) {
       return false;
     }
   }
 
   if (address) {
-    let providedRewardAddress = address;
+    let providedAddress = address;
     let network = Network.MAINNET;
-
-    if (address.startsWith('addr1')) {
-      const paymentAddress = utils.getAddressFromBech32(address) as BaseAddress;
-
-      providedRewardAddress = new RewardAddress(
-        Network.MAINNET,
-        paymentAddress.stakeCredential
-      ).getBech32();
-    } else if (address.startsWith('stake_test1')) {
-      network = Network.TESTNET;
-    } else if (address.startsWith('addr_test1')) {
-      network = Network.TESTNET;
-      const paymentAddress = utils.getAddressFromBech32(address) as BaseAddress;
-      providedRewardAddress = new RewardAddress(
-        Network.MAINNET,
-        paymentAddress.stakeCredential
-      ).getBech32();
-    }
-
+    const paymentAddress = utils.getAddressFromBech32(address) as BaseAddress;
     const coseSign1PublicKey = new Bip32PublicKey(publicKeyBuffer);
+
     const credential = {
       hash: coseSign1PublicKey.toPublicKey().hash().toString('hex'),
       type: 0,
     };
 
-    const rewardAddress = new RewardAddress(network, credential);
-    if (rewardAddress.getBech32() !== providedRewardAddress) {
+    if (address.startsWith('addr')) {
+      if (address.startsWith('addr_test1')) {
+        network = Network.TESTNET;
+      }
+
+      const paymentAddressBech32 = new BaseAddress(
+        network,
+        credential,
+        paymentAddress.stakeCredential
+      ).getBech32();
+
+      if (address !== paymentAddressBech32) {
+        // Test whether the key is a stake key to which this payment key belongs
+        const extractedRewardAddress = new RewardAddress(
+          network,
+          paymentAddress.stakeCredential
+        ).getBech32();
+
+        const rewardAddress = new RewardAddress(
+          network,
+          credential
+        ).getBech32();
+
+        if (rewardAddress !== extractedRewardAddress) {
+          return false;
+        }
+      }
+    } else if (address.startsWith('stake')) {
+      if (address.startsWith('stake_test1')) {
+        network = Network.TESTNET;
+      }
+
+      const rewardAddress = new RewardAddress(network, credential).getBech32();
+
+      if (rewardAddress !== providedAddress) {
+        return false;
+      }
+    } else {
       return false;
     }
   }
