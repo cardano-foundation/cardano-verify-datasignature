@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.5...v1.0.6) (2022-12-18)
+
+
+### Bug Fixes
+
+* update @stricahq/cip08 version to handle hashed payloads (regarding to [#9](https://github.com/cardano-foundation/cardano-verify-datasignature/issues/9)) ([b6adf0e](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/b6adf0ef5f0b12a083e0f819952d19b1ea14985c))
+
 ## [1.0.5](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.4...v1.0.5) (2022-12-13)
 
 
