@@ -64,4 +64,13 @@ describe('testing signature verification', () => {
 
     expect(verifySignature(signature, key, undefined, address)).toBe(true);
   });
+
+  test('hashed payload with stake address that should be valid and return true', () => {
+    const signature =
+      '84582aa201276761646472657373581de0c13582aec9a44fcc6d984be003c5058c660e1d2ff1370fd8b49ba73fa166686173686564f5581c40843181253eb1ff2258ab39c3463ec0edf5e713b73c5482c0ca798f5840a4cdec07ba8c1184aa74d1c3516fc6602a35d2db847510cf98c102653c15c7664f136314f920150a081870aef77ed49780ca58873bd5d62e744b968a89435906';
+    const key =
+      'a40101032720062158209be513df12b3fabe7c1b8c3f9fab0968eb2168d5689bf981c2f7c35b11718b27';
+
+    expect(verifySignature(signature, key)).toBe(true);
+  });
 });
