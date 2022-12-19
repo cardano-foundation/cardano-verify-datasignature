@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.6...v1.0.7) (2022-12-18)
+
+
+### Bug Fixes
+
+* repair payment address verification and check for null payload ([e43225e](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/e43225ea20901e55b68ef771a68b6d5b2258a9d9))
+
 ## [1.0.6](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.5...v1.0.6) (2022-12-18)
 
 
