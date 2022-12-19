@@ -34,6 +34,7 @@
     "@stricahq/bip32ed25519": "^1.0.4",
     "@stricahq/cbors": "^1.0.2",
     "@stricahq/cip08": "^1.0.4",
+    "blakejs": "^1.2.1",
     "@stricahq/typhonjs": "^1.2.8"
   }
 }

@@ -1,4 +1,5 @@
 import verifySignature from './index';
+import { blake2bHex } from 'blakejs';
 
 describe('testing signature verification', () => {
   // https://cips.cardano.org/cips/cip30/#datasignature
@@ -102,11 +103,39 @@ describe('testing signature verification', () => {
     expect(verifySignature(signature, key, address)).toBe(false);
   });
 
-  test('check signature with clear text message but payload is null should be false', () => {
+  test('check signature with plain text message but payload is null should be false', () => {
     const signature =
       '84582aa201276761646472657373581d617863b5c43bdf0a06608abc82f0573a549714ff69166074dcdde393d8a166686173686564f4f65840fc58155f0cee05bc00e7299af1df1f159ac82a46a055786b259657934eff346eec81349d4678ceabc79f213c66a2bdbfd4ea5d9ebdc630bee5ac9cce75cfc001';
     const key =
       'a4010103272006215820755b017578b701dc9ddd4eaee67015b4ca8baf66293b7b1d204df426c0ceccb9';
     expect(verifySignature(signature, key, 'Hello world')).toBe(false);
+  });
+
+  test('check signature with plain text message but empty payload should be false', () => {
+    const signature =
+      '84582aa201276761646472657373581de118987c1612069d4080a0eb247820cb987fea81bddeaafdd41f996281a166686173686564f4405840be14facd63cb33fcfd2a955848ce820f1f479813cdda6dde5d0b57ac1cb86b00a9f3ee4826741a28aa01299cc8985e7019d16ae7ab74ae7bea31f6790de20308';
+    const key =
+      'a4010103272006215820b89526fd6bf4ba737c55ea90670d16a27f8de6cc1982349b3b676705a2f420c6';
+    expect(verifySignature(signature, key, 'Hello World')).toBe(false);
+  });
+
+  test('hashed payload with plain text message that should be valid and return true', () => {
+    const signature =
+      '84582aa201276761646472657373581de0c13582aec9a44fcc6d984be003c5058c660e1d2ff1370fd8b49ba73fa166686173686564f5581c40843181253eb1ff2258ab39c3463ec0edf5e713b73c5482c0ca798f5840a4cdec07ba8c1184aa74d1c3516fc6602a35d2db847510cf98c102653c15c7664f136314f920150a081870aef77ed49780ca58873bd5d62e744b968a89435906';
+    const key =
+      'a40101032720062158209be513df12b3fabe7c1b8c3f9fab0968eb2168d5689bf981c2f7c35b11718b27';
+    const message = 'Hello world';
+
+    expect(verifySignature(signature, key, message)).toBe(true);
+  });
+
+  test('hashed payload with hashed text message that should be valid and return true', () => {
+    const signature =
+      '84582aa201276761646472657373581de0c13582aec9a44fcc6d984be003c5058c660e1d2ff1370fd8b49ba73fa166686173686564f5581c40843181253eb1ff2258ab39c3463ec0edf5e713b73c5482c0ca798f5840a4cdec07ba8c1184aa74d1c3516fc6602a35d2db847510cf98c102653c15c7664f136314f920150a081870aef77ed49780ca58873bd5d62e744b968a89435906';
+    const key =
+      'a40101032720062158209be513df12b3fabe7c1b8c3f9fab0968eb2168d5689bf981c2f7c35b11718b27';
+    const message = blake2bHex('Hello world', undefined, 28); // 28 * 8 bit = 224 bit
+
+    expect(verifySignature(signature, key, message)).toBe(true);
   });
 });

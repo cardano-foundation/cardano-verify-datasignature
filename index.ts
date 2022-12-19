@@ -1,8 +1,9 @@
-import { Bip32PublicKey, PublicKey } from '@stricahq/bip32ed25519';
+import { Bip32PublicKey } from '@stricahq/bip32ed25519';
 import { getPublicKeyFromCoseKey, CoseSign1 } from '@stricahq/cip08';
 import { Decoder } from '@stricahq/cbors';
 import { BaseAddress, RewardAddress } from '@stricahq/typhonjs/dist/address';
 import { utils } from '@stricahq/typhonjs';
+import { blake2bHex } from 'blakejs';
 
 const Network = {
   MAINNET: 1,
@@ -45,7 +46,19 @@ const verifySignature = (
     const decoded = Decoder.decode(Buffer.from(signature, 'hex'));
     const payload: Buffer = decoded.value[2];
 
-    if (payload && payload.toString('utf8') !== message) {
+    const unprotectedMap: Map<any, any> = decoded?.value[1];
+    const isHashed =
+      unprotectedMap && unprotectedMap.get('hashed')
+        ? unprotectedMap.get('hashed')
+        : false;
+
+    if (isHashed && !/^[0-9a-fA-F]+$/.test(message)) {
+      message = blake2bHex(message, undefined, 28); // 28 * 8 bit = 224 bit ~> blake2b224
+    }
+
+    if (isHashed && payload && payload.toString('hex') !== message) {
+      return false;
+    } else if (!isHashed && payload && payload.toString('utf8') !== message) {
       return false;
     }
   }
