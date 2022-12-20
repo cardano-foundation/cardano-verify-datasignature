@@ -1,7 +1,11 @@
 import { Bip32PublicKey } from '@stricahq/bip32ed25519';
 import { getPublicKeyFromCoseKey, CoseSign1 } from '@stricahq/cip08';
 import { Decoder } from '@stricahq/cbors';
-import { BaseAddress, RewardAddress } from '@stricahq/typhonjs/dist/address';
+import {
+  BaseAddress,
+  EnterpriseAddress,
+  RewardAddress,
+} from '@stricahq/typhonjs/dist/address';
 import { utils } from '@stricahq/typhonjs';
 import { blake2bHex } from 'blakejs';
 
@@ -79,25 +83,36 @@ const verifySignature = (
         network = Network.TESTNET;
       }
 
-      const paymentAddressBech32 = new BaseAddress(
-        network,
-        credential,
-        paymentAddress.stakeCredential
-      ).getBech32();
-
-      if (address !== paymentAddressBech32) {
-        // Test whether the key is a stake key to which this payment key belongs
-        const extractedRewardAddress = new RewardAddress(
+      if (paymentAddress.stakeCredential) {
+        const paymentAddressBech32 = new BaseAddress(
           network,
+          credential,
           paymentAddress.stakeCredential
         ).getBech32();
 
-        const rewardAddress = new RewardAddress(
+        if (address !== paymentAddressBech32) {
+          // Test whether the key is a stake key to which this payment key belongs
+          const extractedRewardAddress = new RewardAddress(
+            network,
+            paymentAddress.stakeCredential
+          ).getBech32();
+
+          const rewardAddress = new RewardAddress(
+            network,
+            credential
+          ).getBech32();
+
+          if (rewardAddress !== extractedRewardAddress) {
+            return false;
+          }
+        }
+      } else {
+        // An EnterpriseAddress does not have a stake credential
+        const enterpriseAddress = new EnterpriseAddress(
           network,
           credential
         ).getBech32();
-
-        if (rewardAddress !== extractedRewardAddress) {
+        if (enterpriseAddress !== providedAddress) {
           return false;
         }
       }

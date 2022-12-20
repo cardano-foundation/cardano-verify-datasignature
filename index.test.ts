@@ -138,4 +138,21 @@ describe('testing signature verification', () => {
 
     expect(verifySignature(signature, key, message)).toBe(true);
   });
+
+  test('test verification with provided enterprise address', () => {
+    const signature =
+      '84582aa201276761646472657373581d617863b5c43bdf0a06608abc82f0573a549714ff69166074dcdde393d8a166686173686564f44b48656c6c6f20776f726c645840fc58155f0cee05bc00e7299af1df1f159ac82a46a055786b259657934eff346eec81349d4678ceabc79f213c66a2bdbfd4ea5d9ebdc630bee5ac9cce75cfc001';
+    const key =
+      'a4010103272006215820755b017578b701dc9ddd4eaee67015b4ca8baf66293b7b1d204df426c0ceccb9';
+    const message = 'Hello world';
+
+    expect(
+      verifySignature(
+        signature,
+        key,
+        message,
+        'addr1v9ux8dwy800s5pnq327g9uzh8f2fw98ldytxqaxumh3e8kqumfr6d'
+      )
+    ).toBe(true);
+  });
 });
