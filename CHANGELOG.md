@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.8](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.7...v1.0.8) (2022-12-19)
+
+
+### Features
+
+* add more testcases to check if all cases of [#9](https://github.com/cardano-foundation/cardano-verify-datasignature/issues/9) and [#11](https://github.com/cardano-foundation/cardano-verify-datasignature/issues/11) are now handled correctly ([510e10d](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/510e10dac49f155a65286ba5b48a90ee5257ebf4))
+
 ## [1.0.7](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.6...v1.0.7) (2022-12-18)
 
 
