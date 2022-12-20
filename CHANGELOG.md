@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.10](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.9...v1.0.10) (2022-12-20)
+
+
+### Features
+
+* add cardano-signer as a cli option to the readme ([5364349](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/53643497d5dab0abc1e3b05a404e0d753d1730fe))
+
 ## [1.0.9](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.8...v1.0.9) (2022-12-20)
 
 
