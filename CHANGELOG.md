@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.9](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.8...v1.0.9) (2022-12-20)
+
+
+### Features
+
+* add support for enterprise addresses should fix [#9](https://github.com/cardano-foundation/cardano-verify-datasignature/issues/9) ([619a2ce](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/619a2ce8197fd6bc3f54629505adc22f401d7c9a))
+
 ## [1.0.8](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.7...v1.0.8) (2022-12-19)
 
 
