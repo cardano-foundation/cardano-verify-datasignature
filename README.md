@@ -9,13 +9,13 @@
 
 A lightweight typescript library to verify a cip30 datasignature.
 
-## Getting Started
+## 🚀 Getting Started
 
 ```zsh
 npm i @cardano-foundation/cardano-verify-datasignature
 ```
 
-## Verification
+## 🧐 Verification
 
 You need a key and a signature from a [cip30 datasignature](https://cips.cardano.org/cips/cip30/#apisigndataaddraddresspayloadbytespromisedatasignature).
 
@@ -56,6 +56,8 @@ signMessage('Hello World', 'yoroi').then((dataSignature) =>
 ```
 
 3. Option B: Use the [signMessage](https://github.com/cardano-foundation/cardano-connect-with-wallet/blob/main/src/hooks/useCardano.ts#L133) function of the [cardano-connect-with-wallet](https://github.com/cardano-foundation/cardano-connect-with-wallet) library to get a valid key and signature.
+
+4. Option C: If you want to use the cli to sign or verify data please checkout the [cardano-signer](https://github.com/gitmachtl/cardano-signer) by [gitmachtl](https://github.com/gitmachtl).
 
 ### What does it mean "to verify a signature"?
 
