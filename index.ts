@@ -14,6 +14,51 @@ const Network = {
   TESTNET: 0,
 };
 
+// This function is an adjusted version of
+// https://github.com/StricaHQ/cip08/blob/39223edfe2c20c37a78e49aaab77761f9534cef1/src/coseSign1.ts#L32
+const CoseSign1FromCborWithPayload = (cbor: string, payload: Buffer) => {
+  const decoded = Decoder.decode(Buffer.from(cbor, 'hex'));
+
+  if (!(decoded.value instanceof Array)) throw Error('Invalid CBOR');
+  if (decoded.value.length !== 4) throw Error('Invalid COSE_SIGN1');
+
+  let protectedMap;
+  // Decode and Set ProtectedMap
+  const protectedSerialized = decoded.value[0];
+  try {
+    protectedMap = Decoder.decode(protectedSerialized).value;
+    if (!(protectedMap instanceof Map)) {
+      throw Error();
+    }
+  } catch (error) {
+    throw Error('Invalid protected');
+  }
+
+  // Set UnProtectedMap
+  const unProtectedMap = decoded.value[1];
+  if (!(unProtectedMap instanceof Map)) throw Error('Invalid unprotected');
+
+  // Set Signature
+  const signature = decoded.value[3];
+
+  return new CoseSign1({
+    protectedMap,
+    unProtectedMap,
+    payload,
+    signature,
+  });
+};
+
+const addSpanBytesToObject = (obj: any, span: [number, number]): any => {
+  const spanObj = obj;
+  spanObj.byteSpan = span;
+  spanObj.getByteSpan = function (): [number, number] {
+    return this.byteSpan;
+  };
+
+  return spanObj;
+};
+
 /**
  * This method can be used to verify a cip30 data signature.
  *
@@ -44,17 +89,34 @@ const verifySignature = (
   address?: string
 ): boolean => {
   const publicKeyBuffer = getPublicKeyFromCoseKey(key);
-  const coseSign1 = CoseSign1.fromCbor(signature);
+  let coseSign1 = CoseSign1.fromCbor(signature);
 
   if (message) {
     const decoded = Decoder.decode(Buffer.from(signature, 'hex'));
     const payload: Buffer = decoded.value[2];
-
     const unprotectedMap: Map<any, any> = decoded?.value[1];
     const isHashed =
       unprotectedMap && unprotectedMap.get('hashed')
         ? unprotectedMap.get('hashed')
         : false;
+
+    if (
+      payload === null ||
+      typeof payload === 'undefined' ||
+      (payload.toString() === '' && message !== '')
+    ) {
+      if (isHashed) {
+        coseSign1 = CoseSign1FromCborWithPayload(
+          signature,
+          Buffer.from(blake2bHex(message, undefined, 28))
+        );
+      } else {
+        coseSign1 = CoseSign1FromCborWithPayload(
+          signature,
+          Buffer.from(message)
+        );
+      }
+    }
 
     if (isHashed && !/^[0-9a-fA-F]+$/.test(message)) {
       message = blake2bHex(message, undefined, 28); // 28 * 8 bit = 224 bit ~> blake2b224
