@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.11](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.10...v1.0.11) (2022-12-21)
+
+
+### Bug Fixes
+
+* fill null payload with message parameter if provided. solves [#11](https://github.com/cardano-foundation/cardano-verify-datasignature/issues/11) ([71b1ae4](https://github.com/cardano-foundation/cardano-verify-datasignature/commit/71b1ae44315a8dbfecefcf6a4cdbeac8610f719c))
+
 ## [1.0.10](https://github.com/cardano-foundation/cardano-verify-datasignature/compare/v1.0.9...v1.0.10) (2022-12-20)
 
 
