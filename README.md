@@ -4,8 +4,10 @@
 
 <img alt="Release" src="https://github.com/cardano-foundation/cardano-verify-datasignature/actions/workflows/release.yml/badge.svg?branch=main" />
 <img alt="semantic-release: angular" src="https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release" />
-<img alt="Discord" src="https://img.shields.io/discord/1022471509173882950">
+<a href="https://discord.gg/4WVNHgQ7bP"><img alt="Discord" src="https://img.shields.io/discord/1022471509173882950"></a>
 </p>
+
+[![Discord](https://img.shields.io/discord/1022471509173882950)](https://discord.gg/4WVNHgQ7bP)
 
 A lightweight typescript library to verify a cip30 datasignature.
 
